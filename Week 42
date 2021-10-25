@@ -1,0 +1,18 @@
+library(tidyverse)
+library(data.table)
+library(magrittr)
+pumpkin <- read_csv(urlfile)
+head(pumpkin)
+pumpkin$weight_lbs <- sapply(pumpkin$weight_lbs, as.integer)
+sapply(pumpkin, class)
+pumpkin <- pumpkin[!grepl("damaged", pumpkin$place),]
+pumpkin = select(pumpkin, -14)
+pumpkin <- na.omit(pumpkin)
+x <- aggregate(pumpkin$weight_lbs, list(pumpkin$country), FUN=mean)
+x <- as.data.frame(x)
+names(x)[1] <- 'Countries'
+names(x)[2] <- 'Average_Weight'
+ggplot(x, aes(Countries, Average_Weight, fill=Countries ))+ xlab('Countries') + ylab('Average Weight') + geom_bar(stat="identity", position = "dodge") + theme(axis.text.x=element_text(angle=45,hjust=1))
+glimpse(pumpkin)
+
+# My first Tidy Tuesday and making a graph!
