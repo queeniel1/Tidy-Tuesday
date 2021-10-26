@@ -12,7 +12,7 @@ x <- aggregate(pumpkin$weight_lbs, list(pumpkin$country), FUN=mean)
 x <- as.data.frame(x)
 names(x)[1] <- 'Countries'
 names(x)[2] <- 'Average_Weight'
-ggplot(x, aes(Countries, Average_Weight, fill=Countries ))+ xlab('Countries') + ylab('Average Weight') + geom_bar(stat="identity", position = "dodge") + theme(axis.text.x=element_text(angle=45,hjust=1))
+ggplot(x, aes(Countries, Average_Weight, fill=Countries )) + ggtitle('Average Weight of Pumpkins') + xlab('Countries') + ylab('Average Weight') + geom_bar(stat="identity", position = "dodge") + theme(axis.text.x=element_text(angle=45,hjust=1))
 glimpse(pumpkin)
 
 # My first Tidy Tuesday and making a graph!
