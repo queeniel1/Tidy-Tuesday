@@ -1,0 +1,21 @@
+library(tidyverse)
+url_file <- 'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-10-26/ultra_rankings.csv'
+trail <- read_csv(url_file)
+head(trail)
+trail <- trail[!is.na(trail$rank),]
+avg_rank <- aggregate(trail$rank, list(trail$nationality), FUN=mean)
+avg_rank <- as.data.frame(avg_rank)
+names(avg_rank)[1] = 'Nationality'
+names(avg_rank)[2] = 'Rank'
+
+avg_rank %>%
+  arrange(Rank) %>%
+  head(20)%>%
+  ggplot(aes(x=reorder(Nationality,Rank),Nationality, y=Rank, fill=Nationality)) + labs(title = 'Top 20 Average Ranks') +
+  xlab('Nationality') + ylab('Rank') + geom_bar(stat="identity", position = "dodge", color = 'white', fill = 'light blue') +
+  theme_minimal() + theme(plot.title = element_text(color = 'dark gray', size = 18, hjust = 0.5, face = 'bold'),
+        panel.background = element_rect(fill = 'white', colour = 'gray', size = 0.5, linetype = 'blank'),
+        axis.text.y = element_text(color = 'light gray'), axis.text.x = element_text(color = 'light gray'),
+        axis.title.y = element_text(size = 12, colour = 'dark gray'),
+        axis.title.x = element_text(size = 12, colour = ' dark gray')) +
+  scale_x_discrete(expand = c(0, 0.5))
