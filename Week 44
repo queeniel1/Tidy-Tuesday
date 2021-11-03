@@ -11,8 +11,10 @@ names(avg_rank)[2] = 'Rank'
 avg_rank %>%
   arrange(Rank) %>%
   head(20)%>%
-  ggplot(aes(x=reorder(Nationality,Rank),Nationality, y=Rank, fill=Nationality)) + labs(title = 'Top 20 Average Ranks') +
-  xlab('Nationality') + ylab('Rank') + geom_bar(stat="identity", position = "dodge", color = 'white', fill = 'light blue') +
+  ggplot(aes(x=reorder(Nationality,Rank),Nationality, y=Rank, fill=Nationality)) +
+  labs(title = 'Top 20 Average Ranks in Ultra Trail Running') +
+  xlab('Nationality') + ylab('Rank') +
+  geom_bar(stat="identity", position = "dodge", color = 'white', fill = 'light blue') +
   theme_minimal() + theme(plot.title = element_text(color = 'dark gray', size = 18, hjust = 0.5, face = 'bold'),
         panel.background = element_rect(fill = 'white', colour = 'gray', size = 0.5, linetype = 'blank'),
         axis.text.y = element_text(color = 'light gray'), axis.text.x = element_text(color = 'light gray'),
